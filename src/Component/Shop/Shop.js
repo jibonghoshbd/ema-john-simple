@@ -9,19 +9,24 @@ const Shop = () => {
             .then(res => res.json())
             .then(data => setProducts(data))
     }, [])
+    const handleAddToCard = (product) => {
+        console.log(product)
+
+    }
     return (
         <div className='shop-container'>
             <div className="product-container">
-                <h1>Product: {products.length}</h1>
                 {
                     products.map(product => <Product
+                        key={product.key}
                         product={product}
+                        handleAddToCard={handleAddToCard}
                     ></Product>)
                 }
             </div>
             <div className="order-container">
-                <h1>Hello Order Container</h1>
-                <h3>Hello Order</h3>
+                <h3>Order Summary</h3>
+                <h3>Items ordered: 0</h3>
             </div>
 
         </div>
