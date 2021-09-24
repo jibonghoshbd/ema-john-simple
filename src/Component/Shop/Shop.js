@@ -7,10 +7,14 @@ import './Shop.css'
 const Shop = () => {
     const [products, setProducts] = useState([]);
     const [cart, setCart] = useState([])
+    const [showDisplay, setShowDisplay] = useState([])
     useEffect(() => {
         fetch('./products.JSON')
             .then(res => res.json())
-            .then(data => setProducts(data))
+            .then(data => {
+                setProducts(data)
+                setShowDisplay(data)
+            })
     }, [])
     useEffect(() => {
         const saveCart = getStoredCart();
@@ -18,7 +22,11 @@ const Shop = () => {
             const storCart = [];
             for (const key in saveCart) {
                 const addedProduct = products.find(product => product.key === key);
-                storCart.push(addedProduct)
+                if (addedProduct) {
+                    const quantity = saveCart[key];
+                    addedProduct.quantity = quantity;
+                    storCart.push(addedProduct)
+                }
             }
             setCart(storCart)
         }
@@ -30,24 +38,39 @@ const Shop = () => {
         addToDb(product.key)
 
     }
-    return (
-        <div className='shop-container'>
-            <div className="product-container">
-                {
-                    products.map(product => <Product
-                        key={product.key}
-                        product={product}
-                        handleAddToCard={handleAddToCard}
-                    ></Product>)
-                }
-            </div>
-            <div className="order-container">
-                <Cart
-                    cart={cart}
-                ></Cart>
-            </div>
+    const handelSearch = event => {
+        const searchText = event.target.value;
+        const matchSearch = products.filter(product => product.name.toLowerCase().includes(searchText.toLowerCase()));
 
-        </div>
+        setShowDisplay(matchSearch);
+    }
+    return (
+        <>
+            <div className="input-container">
+                <input
+                    onChange={handelSearch}
+                    type="text"
+                    placeholder='Search Product'
+                />
+            </div>
+            <div className='shop-container'>
+                <div className="product-container">
+                    {
+                        showDisplay.map(product => <Product
+                            key={product.key}
+                            product={product}
+                            handleAddToCard={handleAddToCard}
+                        ></Product>)
+                    }
+                </div>
+                <div className="order-container">
+                    <Cart
+                        cart={cart}
+                    ></Cart>
+                </div>
+
+            </div>
+        </>
     );
 };
 
