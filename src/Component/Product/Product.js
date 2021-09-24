@@ -6,7 +6,7 @@ import './Product.css'
 const Product = (props) => {
     // console.log(props)
     const { img, name, seller, price, stock } = props.product;
-    console.log(props.product)
+    // console.log(props.product)
     const shoppingCartIcon = <FontAwesomeIcon icon={faShoppingCart} />
 
     return (
