@@ -27,9 +27,10 @@ const OrderRevew = () => {
 
             </div>
             <div className="order-container">
-                <Cart cart={cart}></Cart>
+                <Cart cart={cart}>
+                    <button className="btn-regular">Place Order</button>
+                </Cart>
             </div>
-
         </div>
     );
 };
