@@ -1,11 +1,11 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
-import Header from './Component/Header/Header';
-import Inventory from './Component/Inventory/Inventory';
-import NotFound from './Component/NotFound/NotFound';
-import OrderRevew from './Component/OrderRevew/OrderRevew';
-import PlaceOrder from './Component/PlaceOrder/PlaceOrder';
-import Shop from './Component/Shop/Shop';
+import Header from './components/Header/Header';
+import Inventory from './components/Inventory/Inventory';
+import NotFound from './components/NotFound/NotFound';
+import OrderReview from './components/OrderReview/OrderReview';
+import PlaceOrder from './components/PlaceOrder/PlaceOrder';
+import Shop from './components/Shop/Shop';
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
             <Shop></Shop>
           </Route>
           <Route path="/review">
-            <OrderRevew></OrderRevew>
+            <OrderReview></OrderReview>
           </Route>
           <Route path="/inventory">
             <Inventory></Inventory>
